@@ -1,0 +1,51 @@
+<div class="user-title">出入金明细</div>
+<div class="calendar clearfix">
+    <i class="icon-right icon-lr"></i><i class="icon-left icon-lr"></i><div class="calendar-input"><span id="month"></span><input type="month" value="" id="appDate"/></div>
+</div>
+<ul class="transaction-list gold-list clearfix">
+    <li>
+        <a href="#goldDetail" class="clearfix">
+            <div class="float-left recharge">
+                充值
+            </div>
+            <div class="float-right gold">
+                <p class="red num">+100.00</p>
+                <p class="date">2016-12-11</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="#goldDetail" class="clearfix">
+            <div class="float-left withdraws-cash">
+                提现
+            </div>
+            <div class="float-right gold">
+                <p class="green num">-100.00</p>
+                <p class="date">2016-11-18</p>
+            </div>
+        </a>
+    </li>
+</ul>
+<script>
+    var date = new Date();
+    var month = GetDateStr(date, 0);
+    $('#month').text(month);
+    $('#appDate').val(month);
+    //日历左右键切换月份
+    $('.calendar .icon-lr').on('click', function () {
+        var value = $('#appDate').val();
+        var month = 0;
+        if ($(this).hasClass('icon-left')) {
+            month = -1;
+        } else {
+            month = 1;
+        }
+        var date = GetDateStr(value, month);
+        $('#month').text(date);
+        $('#appDate').val(date);
+    });
+    $('#appDate').on('input', function () {
+        var value = $(this).val();
+        $('#month').text(value);
+    });
+</script>

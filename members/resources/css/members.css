@@ -1,0 +1,41 @@
+body{
+    background: #df324e;
+}
+.members-wrap{
+    display: flex;
+    -webkit-display:flex;
+    align-content: center;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    margin-top: 0.26667rem;
+}
+.members-wrap li{
+    width: 3.06666rem;
+    height: 3.06666rem;
+    margin-left:0.2rem;
+    margin-bottom:0.2rem;
+    background: #fff;
+    border-radius: 0.12rem;
+}
+.members-wrap li .logo{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin:0.2rem auto;
+}
+.members-wrap li .logo img{
+    width: 100%;
+    height: 100%;
+}
+.members-wrap li .name{
+    padding:0 0.32rem;
+    color:#333;
+    font-size:12px;
+    text-align: center;
+    line-height: 1.2;
+}
+[data-dpr="2"] .members-wrap li .name{
+    font-size:24px;
+}
+[data-dpr="3"] .members-wrap li .name{
+    font-size:36px;
+}

@@ -1,0 +1,95 @@
+<div class="user-title">交易明细</div>
+<div class="transaction-header clearfix">
+    <div class="num red">+59.20</div>
+    <div class="title">当月盈亏(元)</div>
+    <div class="number clearfix">
+        <span class="float-left">当月单数</span><span class="float-left ml9">2</span>
+        <span class="float-right ml9">2</span><span class="float-right">当月手数</span>
+    </div>
+</div>
+<div class="calendar clearfix">
+    <i class="icon-right icon-lr"></i><i class="icon-left icon-lr"></i><div class="calendar-input"><span id="month"></span><input type="month" value="" id="appDate"/></div>
+</div>
+<ul class="transaction-list">
+    <li class="failed">
+        <a href="#transactionDetail">
+            <span class="one">
+                <em>10</em>
+            </span>
+            <span class="three green">
+                <em>跌</em>
+            </span>
+            <span class="two">
+                10元白银
+            </span>
+            <span class="four">
+                1
+            </span>
+            <span class="five">
+                0
+            </span>
+        </a>
+    </li>
+    <li>
+        <a href="#transactionDetail">
+            <span class="one">
+                <em>11</em>
+            </span>
+            <span class="three green">
+                <em>跌</em>
+            </span>
+            <span class="two">
+                10元白银
+            </span>
+            <span class="four">
+                1
+            </span>
+            <span class="five green">
+                -10.00
+            </span>
+        </a>
+    </li>
+    <li>
+        <a href="#transactionDetail">
+            <span class="one">
+                <em>08</em>
+            </span>
+            <span class="three red">
+                <em>涨</em>
+            </span>
+            <span class="two">
+                100元白银
+            </span>
+
+            <span class="four">
+                1
+            </span>
+            <span class="five red">
+                +10.00
+            </span>
+        </a>
+    </li>
+</ul>
+<script>
+    var date = new Date();
+    var month = GetDateStr(date, 0);
+    $('#month').text(month);
+    $('#appDate').val(month);
+    //日历左右键切换月份
+    $('.calendar .icon-lr').on('click', function () {
+        var value = $('#appDate').val();
+        var month = 0;
+        if ($(this).hasClass('icon-left')) {
+            month = -1;
+        } else {
+            month = 1;
+        }
+        var date = GetDateStr(value, month);
+        $('#month').text(date);
+        $('#appDate').val(date);
+    });
+    $('#appDate').on('input', function () {
+        var value = $(this).val();
+        $('#month').text(value);
+    });
+</script>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-title" content="大泰信息技术有限公司"/>
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="telephone=no,email=no" name="format-detection"/>
+    <meta name="format-detection" content="telephone=no,email=no"/>
+    <meta name="keywords" content="大泰信息技术有限公司"/>
+    <meta name="description" content="大泰信息技术有限公司"/>
+    <title>泰易盈</title>
+    <!--- add js --->
+    <script type="text/javascript" src="js/flexible_css.debug.js"></script>
+    <script type="text/javascript" src="js/flexible.debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/swiper-3.4.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/transaction.css"/>
+    <link rel="stylesheet" type="text/css" href="css/quotation.css"/>
+    <link rel="stylesheet" type="text/css" href="css/iscroll.css"/>
+</head>
+<body onhashchange="miniTrade.changeUrl();">
+<div class="page-content" id="pageContent">
+
+</div>
+
+<ul class="page-tab clearfix">
+    <li>
+        <a href="#index">
+            <div><i class="icon-base icon-index"></i></div>
+            <div class="title">交易</div>
+        </a>
+    </li>
+    <li>
+        <a href="#position">
+            <div class="relative"><i class="icon-base icon-position"></i><div class="new-tip"></div></div>
+            <div class="title">持仓</div>
+        </a>
+    </li>
+    <li>
+        <a href="#notice">
+            <div><i class="icon-base icon-notice"></i></div>
+            <div class="title">公告</div>
+        </a>
+    </li>
+    <li>
+        <a href="#user">
+            <div><i class="icon-base icon-user"></i></div>
+            <div class="title">我的</div>
+        </a>
+    </li>
+</ul>
+<!--提示-->
+<div class="tip-dialog"></div>
+<!--建仓-->
+<div class="jiancang-cover">
+    <div class="jiancang-container clearfix">
+        <div class="jiancang-wrap">
+            <div class="jiancang-title up">
+                <span class="behavior">买涨</span>
+                <span class="name">白银<strong>2576</strong></span>
+                <span class="change">买跌</span>
+                <div class="arrow-up"></div>
+            </div>
+            <div class="jiancang-title down">
+                <span class="behavior">买跌</span>
+                <span class="name">白银<strong>2576</strong></span>
+                <span class="change">买涨</span>
+                <div class="arrow-down"></div>
+            </div>
+            <ul class="jiancang-unit">
+                <li class="active">
+                    10<em>元</em>
+                </li>
+                <li>
+                    100<em>元</em>
+                </li>
+                <li class="disabled">
+                    200<em>元</em>
+                </li>
+            </ul>
+            <div class="jiancang-infor">
+                <div class="label-title">
+                    止盈/损点
+                </div>
+                <ul class="jiancang-limit">
+                    <li class="active">
+                        4
+                    </li>
+                    <li>
+                        8
+                    </li>
+                    <li>
+                        10
+                    </li>
+                </ul>
+                <div class="label-title">
+                    选择数量(最多可买10单)
+                </div>
+                <div class="jiancang-number clearfix">
+                    <div class="number-btn float-left number-start">
+                        1
+                    </div>
+                    <div class="choose-number">
+                        <div class="swiper-container number-box">
+                            <div class="swiper-wrapper"><div class="swiper-slide">1</div>
+                            </div>
+                        </div>
+                        <div class="rule"><div class="rule-up"></div><div class="rule-down"></div><div class="triangle-up"></div></div>
+                    </div>
+                    <div class="number-btn float-right number-end">
+                        10
+                    </div>
+                </div>
+                <div class="tyj-tip clearfix">
+                    <div class="float-left">使用100元体验卷<span class="tyj-number">(<em class="orange">1</em>张可用)</span></div>
+                    <div class="float-right"><input type="checkbox" checked="checked" class="check-switch check-switch-anim"/></div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="require-box">
+                <span class="num">115.00<em>元</em></span><span class="fee">含手续费(15.00元)</span><input type="submit" value="确认买涨" class="btn-submit btn-up"><input type="submit" value="确认买跌" class="btn-submit btn-down">
+            </div>
+        </div>
+    </div>
+</div>
+<!--交易密码过期-->
+<div class="dialog-cover" id="passwordDialog">
+    <div class="dialog-wrap">
+        <div class="dialog-title">交易密码已过期，请重新输入！</div>
+        <form class="unband">
+            <div class="password-form">
+                <div class="form-control">
+                    <input type="password" maxlength="8" placeholder="请输入交易密码" class="input-block" id="password" />
+                </div>
+                <div class="form-submit">
+                    <input type="submit" value="确定" class="input-block submit" id="passwordSubmit" />
+                </div>
+                <div class="forget-password"><span>忘记密码？</span></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script>var date = new Date(1482278400000);
+
+var time = date.Format('hh:mm')
+showTipDiialog($('.tip-dialog'),time+" "+time)
+    document.body.addEventListener('touchstart', function () {});
+    var miniTrade = {};
+    miniTrade.init=function () {
+        miniTrade.changeUrl();
+    };
+    miniTrade.changeUrl = function () {
+        clearTimeout(clearOut);
+        clearInterval(window.clearLine);
+        var url = location.hash.replace('#','');
+        miniTrade.pageUrl(url);
+    };
+    miniTrade.pageUrl = function (url) {
+        if(url ===''){
+            url = 'index';
+        }
+        switch(url){
+            case 'index':
+                $('.page-tab').show().find('li').removeClass('active').eq(0).addClass('active');
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/quotation.html');
+                break;
+            case 'position':
+                $('.page-tab').show().find('li').removeClass('active').eq(1).addClass('active');
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/position.html');
+                break;
+            case 'notice':
+                $('.page-tab').show().find('li').removeClass('active').eq(2).addClass('active');
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/notice.html');
+                break;
+            case 'user':
+                $('.page-tab').show().find('li').removeClass('active').eq(3).addClass('active');
+               $('body').addClass('gary-body');
+                $('#pageContent').load('pages/user-center.html');
+                break;
+            case 'securities':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/securities.html');
+                break;
+            case 'transaction':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/transaction.html');
+                break;
+            case 'gold':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/gold.html');
+                break;
+            case 'userSettings':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/user-settings.html');
+                break;
+            case 'about':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/about.html');
+                break;
+            case 'bindCard':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/bind-card.html');
+                break;
+            case 'goldDetail':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/gold-detail.html');
+                break;
+            case 'realname':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/realname.html');
+                break;
+            case 'register':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/register.html');
+                break;
+            case 'transactionDetail':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/transaction-detail.html');
+                break;
+            case 'withdrawsCash':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/withdraws-cash.html');
+                break;
+            case 'resetPassword':
+                $('.page-tab').hide();
+                $('body').removeClass('gary-body');
+                $('#pageContent').load('pages/reset-password.html');
+                break;
+            case 'noticeDetails':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/notice-details.html');
+                break;
+            case 'noticeDetails1':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/notice-details1.html');
+                break;
+            case 'alreadyRealname':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/already-realname.html');
+                break;
+            case 'userInfor':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/user-infor.html');
+                break;
+            case 'changeMobile':
+                $('.page-tab').hide();
+                $('body').addClass('gary-body');
+                $('#pageContent').load('pages/change-mobile.html');
+                break;
+        }
+    }
+    window.onload=function () {
+        miniTrade.init();
+        $('.page-tab').on('click','li',function () {
+            $('.page-tab li').removeClass('active');
+            $(this).addClass('active');
+        });
+    }
+    $('#passwordDialog').on('click','.dialog-wrap',function (event) {
+        event.preventDefault();
+        return false;
+    });
+    $('#passwordDialog').on('click',function () {
+        $(this).hide();
+    });
+</script>
+</body>
+</html>

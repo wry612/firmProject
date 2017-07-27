@@ -1,0 +1,299 @@
+<div class="user-wrap">
+    <div class="float-left face-box">
+        <a href="#user">
+            <img src="images/user-face.png" class="user-face">
+        </a>
+    </div>
+    <div class="float-left gold-box">
+        <div class="money">
+            <div class="title">
+                可用资产<em>(元)</em>
+            </div>
+            <div class="clearfix number">
+                <span>222258.60</span><a href="javascript:void(0);" class="recharge">充值</a>
+            </div>
+        </div>
+    </div>
+    <div class="tyj float-left">
+        <div class="title">
+            免费体验劵
+        </div>
+        <div class="tyj-num">
+            <img src="images/tyj.png"><span class="tyj-number">X1</span>
+        </div>
+    </div>
+    <img src="images/icon-activity.png" class="icon-activity" />
+</div>
+<div class="goods-wrap">
+    <div class="goods-infor clearfix">
+        <div class="goods-name">
+            <i class="icon-goods"></i><span class="name">白银</span><span class="num">2576</span><i class="icon-fall"></i>
+        </div>
+        <div class="goods-data">
+            <p><span>昨收：</span><span>2974</span></p>
+            <p><span>今开：</span><span>2966</span></p>
+        </div>
+        <div class="goods-data">
+            <p><span>最高：</span><span>2971</span></p>
+            <p><span>最低：</span><span>2964</span></p>
+        </div>
+    </div>
+    <div class="chart-wrap relative">
+        <div class="chart-title">白银K线</div>
+        <div class="chart-box">
+            <div class="chart" id="chart1"></div>
+            <div class="chart chart-k" id="chart2"></div>
+        </div>
+        <div class="tab-box">
+            <ul class="chart-tab">
+                <li class="active">今日走势<div class="border"></div></li><li>1分钟K线<div class="border"></div></li><li>5分钟K线<div class="border"></div></li><li>15分钟K线<div class="border"></div></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="buy-btn">
+    <div class="buy-up"><span>买涨</span><i class="icon-up"></i></div>
+    <div class="buy-down"><span>买跌</span><i class="icon-down"></i></div>
+</div>
+<div class="quotation-tip">
+    交易时间： 每周一8:00~周六4:00； 每日4：00~7：00休市结算
+</div>
+
+<!--adv-->
+<div class="swiper-cover">
+    <div class="swiper-wrap">
+        <div class="clearfix">
+            <div class="adv-close"></div>
+        </div>
+        <div class="swiper-container" id="activityImg">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a href="#register"><img src="images/test-adv.png" /></a></div>
+                <div class="swiper-slide"><a href="#register"><img src="images/test-adv.png" /></a></div>
+                <div class="swiper-slide"><a href="#register"><img src="images/test-adv.png" /></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/chart.js"></script>
+<script>
+    $(function () {
+        //体验劵使用切换
+        $('.check-switch').on('click',function () {
+            $(this).toggleClass('checked');
+        });
+
+        //K线切换
+        myChart1.setOption(lineOption);
+        $('.chart-tab').on('click','li',function () {
+            $('.chart-tab li').removeClass('active');
+            $(this).addClass('active');
+            var index = $(this).index();
+            switch(index){
+                case 0:
+                    $('#chart2').css('z-index',1);
+                    $('#chart1').css('z-index',2);
+                    myChart1.setOption(lineOption);
+                    break;
+                case 1:
+                    $('#chart1').css('z-index',1);
+                    $('#chart2').css('z-index',2);
+                    myChart2.setOption(KOption);
+                    break;
+                case 2:
+                    $('#chart1').css('z-index',1);
+                    $('#chart2').css('z-index',2);
+                    myChart2.setOption(KOption);
+                    break;
+                case 3:
+                    $('#chart1').css('z-index',1);
+                    $('#chart2').css('z-index',2);
+                    myChart2.setOption(KOption);
+                    break;
+            }
+        });
+
+        //广告模块
+        var mySwiper = null;
+        $('.icon-activity').on('click',function () {
+            $('.swiper-cover').fadeIn(function () {
+                $('.swiper-cover .swiper-wrap').animate({
+                    'width':'80%',
+                    'height':'11.68rem'
+                },300,function () {
+                    $('.adv-close').animate({'opacity':1});
+                    if(mySwiper==null){
+                        mySwiper = new Swiper('#activityImg', {
+                            autoplay: 5000,//可选选项，自动滑动
+                            autoplayDisableOnInteraction:false,
+                            loop:true,
+                            grabCursor:true,
+                            roundLengths:true
+                        });
+                    }
+                })
+            });
+        });
+        $('.swiper-cover .swiper-container').on('click',function (event) {
+            event.preventDefault();
+            return false;
+        });
+        $('.swiper-cover').on('click',function () {
+            $('.swiper-cover .swiper-wrap').animate({
+                'width':'0%',
+                'height':'0rem'
+            },300,function () {
+                $('.adv-close').css('opacity',0);
+                $('.swiper-cover').hide();
+            });
+        });
+
+
+        //建仓模块
+        var upOrDown = 0;
+        $('.buy-up').on('click',function () {
+            upOrDown = 1;
+            $('.jiancang-cover').fadeIn().addClass('up-show');
+            numberSwiperInit('.number-box',10);
+        });
+        $('.buy-down').on('click',function () {
+            upOrDown = -1;
+            $('.jiancang-cover').fadeIn().addClass('down-show');
+            numberSwiperInit('.number-box',10);
+        });
+        $('.change').on('click',function () {
+            if(upOrDown==-1)
+            {
+                upOrDown = 1;
+                $('.jiancang-cover').addClass('ani');
+                setTimeout(function () {
+                    $('.jiancang-cover').removeClass('down-show').addClass('up-show').removeClass('ani');
+                },300);
+            }else if(upOrDown==1){
+                upOrDown = -1
+                $('.jiancang-cover').addClass('ani');
+                setTimeout(function () {
+                    $('.jiancang-cover').removeClass('up-show').addClass('down-show').removeClass('ani');
+                },300);
+            }
+        });
+        $('.jiancang-unit').on('click','li',function () {
+            if($(this).hasClass('disabled')||$(this).hasClass('active')){
+                return false;
+            }
+            $(this).parent().find('li').removeClass('active')
+            $(this).addClass('active');
+            //模拟判断用户选择单价后的可下单最大数
+            if($(this).index()==0){
+                if(upOrDown==1){
+                    numberSwiperInit('.number-box',10);
+                }else if(upOrDown==-1){
+                    numberSwiperInit('.number-box',10);
+                }
+
+            }else if($(this).index()==1){
+                if(upOrDown==1){
+                    $('.number-end').html(5);
+                    numberSwiperInit('.number-box',5);
+                }else if(upOrDown==-1){
+                    $('.number-end').html(5);
+                    numberSwiperInit('.number-box',5);
+                }
+            }
+            $('.number-btn').removeClass('active');
+            numberSwiper.slideTo(0, 100, false);
+        });
+        $('.jiancang-limit').on('click','li',function () {
+            $(this).parent().find('li').removeClass('active')
+            $(this).addClass('active');
+        });
+        $('.jiancang-wrap').on('click',function (event) {
+            event.preventDefault();
+            return false;
+        });
+        $('.jiancang-cover').on('click',function () {
+            $('.jiancang-cover').removeClass('up-show down-show').fadeOut(function () {
+                $('.jiancang-unit li').removeClass('active').eq(0).addClass('active');
+                $('.jiancang-limit li').removeClass('active').eq(0).addClass('active');
+                $('.check-switch').removeClass('checked');
+                $('.number-btn').removeClass('active');
+            });
+        });
+        //建仓是验证密码时效
+        $('.btn-submit').on('click',function () {
+            if($(this).hasClass('disabled')){
+                showDialog($('.tip-dialog'),'余额不足，请充值！');
+                return false;
+            }
+            //如果未注册，则跳转注册页
+            //如果密码过期
+            showDialog($('#passwordDialog'));
+            //如果无异常，则正常下单
+        });
+        $('#passwordSubmit').on('click',function () {
+            var value = $('#password').val();
+            if(value.length==0){
+                showTipDiialog($('.tip-dialog'), '请输入交易密码');
+                return;
+            }
+            hideDialog($('#passwordDialog'),function () {
+                showTipDiialog($('.tip-dialog'),'下单成功',function () {
+                    $('.jiancang-cover').removeClass('up-show down-show').fadeOut(function () {
+                        $('.jiancang-unit li').removeClass('active').eq(0).addClass('active');
+                        $('.jiancang-limit li').removeClass('active').eq(0).addClass('active');
+                        $('.check-switch').removeClass('checked');
+                        $('.number-btn').removeClass('active');
+                        $('.new-tip').show();
+                    });
+                });
+            });
+        });
+        //数字滑块
+        var numberSwiper = null;
+        $('.number-start').on('click',function () {
+            $('.number-end').removeClass('active');
+            $(this).toggleClass('active');
+            numberSwiper.slideTo(0, 1000, false);
+        });
+        $('.number-end').on('click',function () {
+            $('.number-start').removeClass('active');
+            $(this).toggleClass('active');
+            var value = $(this).html();
+            var index = parseInt(value,10)-1;
+            numberSwiper.slideTo(index, 100, false);
+        });
+
+        /*
+         * container 滑块容器
+         * num 数字的最大值（默认从1开始依次递增）
+         * */
+        function numberSwiperInit(container,num) {
+            $('.number-end').html(num);
+            var arr = [];
+            $(container).find('.swiper-wrapper').empty();
+            for(var i=1;i<=num;i++){
+                arr.push('<div class="swiper-slide">'+i+'</div>');
+            }
+            if(!numberSwiper){
+                numberSwiper = new Swiper(container, {
+                    slidesPerView: 5,
+                    centeredSlides: true,
+                    onTouchMove:function (swiper) {
+                        $('.number-btn').removeClass('active');
+                    },
+                    onSlideChangeEnd: function(swiper){
+                        console.log(swiper.activeIndex) //切换结束时，告诉我现在是第几个
+                    }
+                });
+                numberSwiper.appendSlide(arr);
+                numberSwiper.update();
+                numberSwiper.slideTo(0, 0, false);
+            }else{
+                numberSwiper.appendSlide(arr);
+                numberSwiper.update();
+                numberSwiper.slideTo(0, 0, false);
+            }
+        }
+    });
+</script>

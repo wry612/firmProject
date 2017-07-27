@@ -1,0 +1,66 @@
+<div class="user-title">个人设置</div>
+<div class="nav-list">
+    <ul>
+        <li>
+            <a href="#userInfor"><span>个人信息</span><i class="icon-right"></i></a>
+        </li>
+        <li>
+            <a href="#resetPassword"><span>修改密码</span><i class="icon-right"></i></a>
+        </li>
+        <li>
+            <a href="#changeMobile"><span>修改手机号</span><i class="icon-right"></i></a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" id="unbandCard"><span>解绑银行卡</span><i class="icon-right"></i></a>
+        </li>
+        <!--如果没有进行过实名认证-->
+        <li>
+            <a href="#realname"><span>实名认证</span><i class="icon-right"></i><div class="float-right"></div></a>
+        </li>
+        <!--如果已进行过实名认证-->
+        <li>
+            <a href="javascript:void(0);"><span>实名认证</span><i class="icon-right"></i><div class="float-right"><span class="title">已实名</span><span class="name">王**</span></div></a>
+        </li>
+    </ul>
+</div>
+
+<!--解绑银行卡-->
+<div class="dialog-cover" id="bank">
+    <div class="dialog-wrap">
+        <div class="dialog-title">解绑当前银行卡，请输入交易密码！</div>
+        <form class="unband">
+            <div class="password-form">
+                <div class="form-control">
+                    <input type="password" maxlength="8" placeholder="请输入6~8位交易密码" class="input-block" id="password" />
+                </div>
+                <div class="form-submit">
+                    <input type="submit" value="确定" class="input-block submit" />
+                </div>
+                <div class="forget-password"><span>忘记密码？</span></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $('#unbandCard').on('click',function () {
+        showDialog($('#bank'));
+    });
+    $('.submit').on('click',function () {
+        var value = $('#password').val();
+        if(value.length==0){
+            showTipDiialog($('.tip-dialog'), '请输入交易密码');
+            return;
+        }
+        window.location.hash = '#bindCard';
+    });
+    $('.forget-password span').on('click',function () {
+        window.location.hash = '#resetPassword';
+    });
+    $('#bank').on('click','.dialog-wrap',function (event) {
+        event.preventDefault();
+        return false;
+    });
+    $('#bank').on('click',function () {
+        $(this).hide();
+    });
+</script>

@@ -1,0 +1,45 @@
+<div class="user-title">请输入新的银行卡号</div>
+<form>
+    <div class="shadow-gray">
+        <div class="register-form">
+            <div class="form-control clearfix number-show no-mrbt">
+                <span>姓名：</span><span>王**</span>
+            </div>
+            <div class="form-control clearfix number-show no-mrbt">
+                <span>身份证号：</span><span>320831************</span>
+            </div>
+        </div>
+    </div>
+    <div class="register-form">
+        <div class="form-control">
+            <input type="number" placeholder="银行卡号" class="input-block bank-card" />
+        </div>
+        <div class="change-tip">
+            <div class="change-box">
+                <label>手机号码</label><input type="tel" maxlength="11" placeholder="请输入手机号码" value="15888888888" id="mobileNumber" class="mobile" />
+            </div>
+            <div class="text-right">该手机号需与银行预留手机号码一致，如不一致请更改！</div>
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="确定" class="input-block submit" />
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    //实名认证
+    $('.submit').on('click',function () {
+        var mobile = $('.mobile').val();
+        var bankCard = $('.bank-card').val();
+        if(bankCard.length==0){
+            showTipDiialog($('.tip-dialog'), '请输入银行卡号');
+            return false;
+        }
+        if (mobile.length < 11) {
+            showTipDiialog($('.tip-dialog'), '请输入正确的手机号码');
+            return false;
+        }
+        showTipDiialog($('.tip-dialog'), '银行卡修改成功',function () {
+            window.location.hash="#userSettings";
+        });
+    });
+</script>

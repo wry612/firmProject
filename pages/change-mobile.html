@@ -1,0 +1,43 @@
+<div class="user-title">修改手机号</div>
+<form>
+    <div class="shadow-gray">
+        <div class="register-form">
+            <div class="form-control clearfix">
+                <input type="tel" maxlength="11" placeholder="请输入手机号码" id="mobileNumber" class="mobile" /><input type="button" value="获取验证码" class="sendCode primary float-right"/>
+            </div>
+            <div class="form-control relative">
+                <input type="tel" maxlength="4" disabled placeholder="请输入短信验证码" class="input-block checkCode" />
+                <i class="icon-check-pass"></i>
+            </div>
+            <div class="form-submit">
+                <input type="submit" value="确定" class="input-block submit" />
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    //注册
+    clearTimeout(clearOut);
+    $('.submit').on('click',function () {
+        var mobile = $('.mobile').val();
+        var code = $('.checkCode').val();
+        if (mobile.length < 11) {
+            showTipDiialog($('.tip-dialog'), '请输入正确的手机号码');
+            return false;
+        }
+        if (code.length > 0 && code.length < 4) {
+            showTipDiialog($('.tip-dialog'), '请输入4位数字验证码');
+            return false;
+        } else if (code.length == 0) {
+            showTipDiialog($('.tip-dialog'), '请输入验证码');
+            return false;
+        }
+        if(codeNumber!=code){
+            showTipDiialog($('.tip-dialog'), '验证码错误，请重新输入验证码');
+            return false;
+        }
+        showTipDiialog($('.tip-dialog'),'手机号修改成功！',function () {
+            window.location.hash="#userSettings";
+        });
+    });
+</script>
